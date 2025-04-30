@@ -284,7 +284,10 @@ class DataAnalysisAgent:
         
         self.logger.info(f"Sending request to {provider} with {len(messages)} messages")
         
-        # Log the last user message
+        # Log full input messages sent to LLM
+        self.logger.data("LLM Input Messages", messages)
+        
+        # Rest of the existing code for getting the last user message
         last_user_msg = None
         for msg in reversed(messages):
             if msg["role"] == "user":
@@ -327,6 +330,24 @@ class DataAnalysisAgent:
                 elapsed_time = time.time() - start_time
                 self.logger.info(f"Received response from OpenAI in {elapsed_time:.2f} seconds ({len(content)} chars)")
                 
+                # Log full response object, converting non-serializable objects to strings
+                usage_dict = None
+                if hasattr(response, 'usage'):
+                    try:
+                        # Try to convert to dict if _asdict() is available
+                        usage_dict = response.usage._asdict() if hasattr(response.usage, '_asdict') else str(response.usage)
+                    except Exception:
+                        # Fallback to string representation
+                        usage_dict = str(response.usage)
+                
+                self.logger.data("LLM Full Response Object", {
+                    "id": response.id,
+                    "model": response.model,
+                    "content": content,
+                    "finish_reason": response.choices[0].finish_reason,
+                    "usage": usage_dict
+                })
+                
                 # Log response metadata if available
                 if hasattr(response, 'usage') and response.usage:
                     try:
@@ -358,6 +379,12 @@ class DataAnalysisAgent:
             system_messages = [msg for msg in messages if msg["role"] == "system"]
             system_prompt = system_messages[0]["content"] if system_messages else None
             
+            # Log Anthropic-specific message format
+            self.logger.data("Anthropic Input Format", {
+                "messages": anthropic_messages,
+                "system_prompt": system_prompt
+            })
+            
             try:
                 model = self.llm_config["model"]
                 temperature = self.llm_config["temperature"]
@@ -380,9 +407,25 @@ class DataAnalysisAgent:
                 elapsed_time = time.time() - start_time
                 self.logger.info(f"Received response from Anthropic in {elapsed_time:.2f} seconds ({len(content)} chars)")
                 
+                # Log full response object with safe serialization
+                stop_reason = response.stop_reason if hasattr(response, 'stop_reason') else None
+                
+                # Safely convert usage to string to avoid serialization issues
+                usage_str = None
+                if hasattr(response, 'usage'):
+                    usage_str = str(response.usage)
+                
+                self.logger.data("LLM Full Response Object", {
+                    "id": response.id,
+                    "model": response.model,
+                    "content": content,
+                    "stop_reason": stop_reason,
+                    "usage": usage_str
+                })
+                
                 # Log response metadata if available
                 if hasattr(response, 'usage') and response.usage:
-                    self.logger.debug(f"Token usage information: {response.usage}")
+                    self.logger.debug(f"Token usage information: {str(response.usage)}")
                 
                 self.logger.data("LLM Response", content[:1000] + "..." if len(content) > 1000 else content)
                 return content
@@ -978,6 +1021,11 @@ async def run_interactive_session(agent: DataAnalysisAgent):
             file_list = ", ".join(data_files)
             logger.info(f"Available datasets: {file_list}")
             print(file_list)
+            
+            # Add a note about case sensitivity for column names
+            print("\nNOTE: When accessing columns in datasets, make sure to use the exact column names")
+            print("as they appear in the file (case-sensitive, including underscores).")
+            print("For example, use 'marketing_spend' rather than 'Marketing Spend'.")
         else:
             logger.info("No datasets found")
             print("No datasets found. You can place CSV, JSON, or Excel files in the data directory.")

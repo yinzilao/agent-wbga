@@ -743,15 +743,15 @@ class DataVisualizeTool(Tool):
             
             plt.close()
             
-            # Convert to base64 for display
-            buffer.seek(0)
-            image_data = base64.b64encode(buffer.read()).decode()
-            
-            markdown_output = f"![Visualization](data:image/png;base64,{image_data})"
-            
-            # If image was saved locally, include that information
+            # Simplified output that doesn't include the full base64 data
             if self.save_dir is not None and filepath is not None:
-                markdown_output += f"\n\n*Visualization saved locally as: {os.path.basename(filepath)}*"
+                markdown_output = f"Image created and saved as: {os.path.basename(filepath)}"
+            else:
+                # If no save directory is specified, we still need to return something
+                # Convert to base64 for display but don't include it in the output
+                buffer.seek(0)
+                image_data = base64.b64encode(buffer.read()).decode()
+                markdown_output = "Image created successfully (not saved to disk)"
             
             elapsed_time = time.time() - start_time
             if has_logger:
@@ -819,7 +819,7 @@ async def main():
         
         # Test data visualization
         result = await data_viz("temp_sample | bar | x=city,y=salary,title=Salary by City")
-        print(f"Data Visualization Result: (Base64 image data)")
+        print(f"Data Visualization Result: {result}")
         
     finally:
         # Clean up

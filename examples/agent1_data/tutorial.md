@@ -695,18 +695,36 @@ async def __call__(self, query: str) -> str:
     
     # Create the plot (various plot types implementation...)
     
-    # Save and return the visualization as base64
-buffer = BytesIO()
-plt.tight_layout()
-plt.savefig(buffer, format='png')
-plt.close()
-
-# Convert to base64 for display
-buffer.seek(0)
-image_data = base64.b64encode(buffer.read()).decode()
-
-return f"![Visualization](data:image/png;base64,{image_data})"
+    # Save and return the visualization
+    buffer = BytesIO()
+    plt.tight_layout()
+    plt.savefig(buffer, format='png')
+    
+    # Save locally if save_dir is specified
+    filepath = None
+    if self.save_dir is not None:
+        filename = self._generate_filename(dataset_name, plot_type, options)
+        filepath = os.path.join(self.save_dir, filename)
+        plt.savefig(filepath)
+        if has_logger:
+            logger.info(f"Saved visualization to {filepath}")
+    
+    plt.close()
+    
+    # Return a simplified message instead of the full base64 data
+    if self.save_dir is not None and filepath is not None:
+        return f"Image created and saved as: {os.path.basename(filepath)}"
+    else:
+        return "Image created successfully (not saved to disk)"
 ```
+
+This visualization tool:
+1. Parses the query to extract the dataset name, plot type, and options
+2. Retrieves the DataFrame using the DataLoadTool's static method
+3. Creates the appropriate plot based on the specified type
+4. Saves the plot to a file if a save directory is specified
+5. Returns a simple message indicating that the visualization was created and where it was saved
+6. Importantly, it doesn't include the full base64-encoded image data in the response to avoid cluttering the output
 
 ## 8. Using the Agent: A Practical Example
 
@@ -810,7 +828,7 @@ Tool Result:
 data_viz: sales_data | bar | x=region,y=sales,title=Total Sales by Region
 ```
 
-Tool Result: ![Visualization](data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAmQAAAGDCAYAAACFuAwbAAAAOXRFWHRTb2Z...)
+Tool Result: Image created and saved as: sales_data_bar_region_sales_20240625_143722.png
 
 Based on the analysis, here's what I found:
 
@@ -826,7 +844,7 @@ Based on the analysis, here's what I found:
    - South: $44,300
    - West: $61,800
 
-The bar chart visually confirms that the West region has the highest total sales, followed by North, South, and East. The West region significantly outperforms the other regions in sales.
+The bar chart has been created and saved as 'sales_data_bar_region_sales_20240625_143722.png' in the visualizations directory. It visually shows that the West region has the highest total sales, followed by North, South, and East regions.
 
 Would you like me to analyze the return on marketing investment (ROMI) to get a better understanding of marketing efficiency?
 ```
@@ -858,11 +876,11 @@ profit            0.145532  0.405613  0.201254  0.942168  0.763497        0.9132
 data_viz: sales_data | scatter | x=marketing_spend,y=profit,title=Marketing Spend vs. Profit
 ```
 
-Tool Result: ![Visualization](data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAmQAAAGDCAYAAAC...)
+Tool Result: Image created and saved as: sales_data_scatter_marketing_spend_profit_20240625_143845.png
 
 Based on my analysis, there is a strong positive correlation between marketing spend and profit, with a correlation coefficient of 0.91 (on a scale from -1 to 1). This indicates that as marketing spend increases, profit tends to increase as well.
 
-The scatter plot visually confirms this relationship, showing a clear positive trend. The points form a fairly tight pattern moving upward from left to right, indicating that higher marketing spend is generally associated with higher profit.
+The scatter plot has been saved as 'sales_data_scatter_marketing_spend_profit_20240625_143845.png' in the visualizations directory. It visually confirms this relationship, showing a clear positive trend. The points form a fairly tight pattern moving upward from left to right, indicating that higher marketing spend is generally associated with higher profit.
 
 This strong correlation suggests that the marketing spend is effective at generating profitable sales. However, correlation doesn't necessarily imply causation, so other factors might also be influencing this relationship.
 
@@ -909,10 +927,95 @@ Now that we've seen the agent in action, let's understand the core workflows tha
    - User requests a visualization
    - The LLM selects an appropriate plot type
    - DataVisualizeTool creates the plot with matplotlib
-   - The plot is saved as an image and encoded in base64
-   - The encoded image is returned and displayed to the user
+   - The plot is saved to a file in the visualizations directory
+   - A message indicating the image was created and saved is returned
+   - This approach avoids including large base64-encoded image data in the response
+   - Users can view the saved visualizations in the specified directory
 
-## 10. Extending the Agent
+## 10. Understanding the Agent Through Logs
+
+The Data Analysis Agent includes a comprehensive logging system that helps you understand its operation and troubleshoot issues. Here's how logging works in this agent:
+
+### Log Configuration
+
+The agent sets up logging during initialization:
+
+```python
+# Setup logger
+log_dir = os.path.join(os.path.dirname(__file__), "logs")
+log_level = "DEBUG" if args.debug else args.log_level
+logger = setup_logger(log_dir=log_dir, log_to_console=True, log_level=log_level)
+
+logger.info("========== STARTING DATA ANALYSIS AGENT ==========")
+logger.info(f"Command-line arguments: {vars(args)}")
+```
+
+Logs are stored in a `logs` directory and can also be displayed on the console. The log level can be set through command-line arguments.
+
+### What Gets Logged
+
+The agent logs various events and operations:
+
+1. **Initialization**: 
+   ```
+   INFO: ========== STARTING DATA ANALYSIS AGENT ==========
+   INFO: Command-line arguments: {'provider': 'openai', 'model': 'gpt-3.5-turbo', ...}
+   INFO: LLM configuration: {'provider': 'openai', 'model': 'gpt-3.5-turbo', 'temperature': 0.7}
+   INFO: Using data directory: /path/to/data
+   INFO: Visualizations will be saved to /path/to/visualizations
+   ```
+
+2. **Tool Registration**:
+   ```
+   INFO: Creating tool registry
+   INFO: Registered tools: data_load, data_query, data_stats, data_viz, calculator, datetime
+   ```
+
+3. **User Interaction**:
+   ```
+   INFO: Processing user message
+   ```
+
+4. **Tool Execution**:
+   ```
+   DEBUG: Loading data from file: sales_data.csv
+   INFO: Loaded DataFrame with shape (24, 7)
+   DEBUG: Creating bar plot with x=region, y=sales
+   INFO: Saved visualization to /path/to/visualizations/sales_data_bar_region_sales_20240625_143722.png
+   INFO: Visualization created in 0.38s
+   ```
+
+### Using Logs to Understand the Agent
+
+The logs provide valuable insights into:
+
+1. **Workflow Sequence**: Logs show the sequence of operations from user input to response generation.
+
+2. **Tool Usage**: You can see which tools are being invoked and with what parameters.
+
+3. **Performance Metrics**: Logs include timing information for operations like visualization creation.
+
+4. **Error Diagnosis**: When something goes wrong, logs provide detailed error information.
+
+Example of using logs to understand visualization creation:
+
+```
+DEBUG: Creating scatter plot with x=marketing_spend, y=profit
+DEBUG: Set plot title: Marketing Spend vs. Profit
+INFO: Saved visualization to /path/to/visualizations/sales_data_scatter_marketing_spend_profit_20240625_143845.png
+INFO: Visualization created in 0.42s
+```
+
+This tells us:
+- The type of plot being created (scatter)
+- The columns being used (marketing_spend, profit)
+- The title being set
+- Where the visualization was saved
+- How long it took to create
+
+By examining these logs, you can gain a deeper understanding of how the agent processes requests and performs data analysis tasks.
+
+## 11. Extending the Agent
 
 Now that you understand how the agent works, let's explore how you can extend it with new capabilities:
 
@@ -999,7 +1102,7 @@ class DatabaseConversation:
     # Implement other required methods...
 ```
 
-## 11. Best Practices for Building AI Agents
+## 12. Best Practices for Building AI Agents
 
 Based on this example, here are some best practices for building your own AI agents:
 
@@ -1047,7 +1150,7 @@ Based on this example, here are some best practices for building your own AI age
    - Batch operations when possible
    - Monitor and optimize resource usage
 
-## 12. Troubleshooting Common Issues
+## 13. Troubleshooting Common Issues
 
 When building your own agent, you might encounter these common issues:
 
