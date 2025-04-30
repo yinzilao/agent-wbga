@@ -1,0 +1,86 @@
+---
+description: 
+globs: 
+alwaysApply: true
+---
+# Best Practices for AI Engineering
+
+## Version Control and Configuration Management
+- Use version control for prompts, models, and code
+- Maintain a prompt template library
+- Record model versions and configurations
+- Use configuration management to track changes
+- Implement semantic versioning
+- Maintain a changelog for each version
+- Use a branching strategy to isolate experimental changes
+- Implement a code review process
+
+## Monitoring and Observability
+- Implement agent behavior logging
+- Track key performance indicators (latency, success rate)
+- Set up alerts for abnormal behavior
+- Monitor resource usage and costs
+- Visualize agent decision-making processes
+- Implement distributed tracing
+- Monitor model calls and dependent services
+- Build dashboards for key metrics
+
+## Continuous Integration and Deployment
+- Build an automated test pipeline
+- Implement a gradual rollout strategy
+- Use A/B testing to evaluate changes
+- Maintain fast rollback capabilities
+- Automate deployment and infrastructure management
+- Use environment separation (development, test, production)
+- Implement code quality checks
+- Automated documentation generation
+
+## Feature Flags
+- Use feature switches to control proxy functions
+- Implement canary deployment
+- Enable specific features for different user groups
+- Roll out new features gradually to reduce risks
+- Use A/B testing to evaluate new features
+- Implement monitoring and metrics for feature switches
+- Establish feature lifecycle management
+- Automate feature switch management
+
+## Scalability design
+- Design an architecture that supports horizontal scalability
+- Implement caching strategies to reduce model calls
+- Use asynchronous processing and queue management
+- Implement load balancing and traffic distribution
+- Design stateless components for easy scalability
+- Optimize resource usage efficiency
+- Implement current limiting and degradation strategies
+- Consider multi-region deployment and geographic distribution
+
+## Technical debt management
+- Perform code refactoring regularly
+- Maintain a technical debt list
+- Balance new feature development with debt repayment
+- Set code quality and coverage goals
+- Record design decisions and trade-offs
+- Continuously review and update dependencies
+- Eliminate obsolete code and interfaces
+- Implement code complexity monitoring
+
+## Developer experience
+- Provide a comprehensive development environment setup
+- Simplify local testing and debugging processes
+- Maintain clear API documentation
+- Create code samples and tutorials
+- Build an internal knowledge base and best practices
+- Automate repetitive development tasks
+- Provide helpful error messages and debugging information
+- Organize code demonstrations and learning sessions
+
+## Cost Management
+- Implement cost tracking for model usage
+- Optimization tips to reduce token consumption
+- Set budgets and resource usage limits
+- Monitor and predict cost trends
+- Implement a tiered caching strategy
+- Allocate resources based on task importance
+- Regularly review cost-effectiveness
+- Experiment with cost-effectiveness of different models and providers

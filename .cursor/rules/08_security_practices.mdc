@@ -1,0 +1,65 @@
+---
+description: 
+globs: 
+alwaysApply: true
+---
+# AI Security Best Practices
+
+## Input Validation
+- Validate all user input to prevent prompt injection attacks
+- Implement content filtering and length limits
+- Detect and handle malicious input patterns
+- Implement input normalization and sanitization
+- Use whitelists instead of blacklists for validation
+- Implement input throttling and rate limiting
+- Provide meaningful error messages for inputs that fail validation
+
+## Data Security
+- Limit agent access to sensitive data
+- Implement the principle of least privilege
+- Do not include sensitive information in prompts
+- Anonymize user data
+- Implement data encryption (in transit and at rest)
+- Perform regular data access audits
+- Establish data retention and deletion policies
+- Comply with privacy regulations (GDPR, CCPA, etc.)
+
+## Model Security
+- Use appropriate security boundaries to limit model behavior
+- Monitor and audit agent behavior
+- Implement mechanisms to prevent jailbreaks
+- Establish fallback strategies to handle anomalies
+- Regularly evaluate the model's response to adversarial inputs
+- Implement a multi-layered defense strategy
+- Limit sensitive information in model responses
+- Use different models for tasks with different security levels
+
+## Third-party tool integration security
+- Validate all tool inputs and outputs
+- Sandbox external tool execution
+- Limit API access permissions and scope
+- Monitor tool usage
+- Implement secure management of API keys and credentials
+- Regularly update and review third-party tools
+- Implement timeout and retry policies for API calls
+- Use HTTPS and secure communication protocols
+
+## Authentication and authorization
+- Implement strong user authentication mechanisms
+- Use multi-factor authentication
+- Implement role-based access control
+- Regularly review access permissions
+- Set authorization boundaries for operations with different sensitivity levels
+- Monitor for abnormal access patterns
+- Implement session management and timeouts
+- Securely store authentication credentials
+
+## Vulnerability management
+- Perform security assessments and penetration tests regularly
+- Apply security patches and updates in a timely manner
+- Establish vulnerability reporting and response processes
+- Implement security incident monitoring and alerts
+- Develop a security incident response plan
+- Conduct security incident drills
+- Stay on top of emerging security threats
+- Participate in AI security communities and updates

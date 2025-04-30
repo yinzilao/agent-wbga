@@ -1,0 +1,87 @@
+---
+description: 代理开发技术指南
+globs: 
+alwaysApply: true
+---
+# Agent Development Technical Guidelines
+
+## Agent Architecture Fundamentals
+- Emphasize the core components of an agent system:
+  - Input processing
+  - Planning and reasoning
+  - Tool usage
+  - Memory and state management
+  - Output generation
+- Explain the relationship between these components.
+- Distinguish between different agent paradigms (reactive, deliberative, hybrid).
+
+## MCP Implementation
+- Guide on implementing key MCP (Model Control Protocol) patterns.
+- Focus on the distinction between agent-as-a-service and embedded agents.
+- Cover control flow mechanisms and state management.
+- Explain tool definitions, tool calling, and result handling.
+- Address context management across multiple interactions.
+
+## Development Best Practices
+- Modular design that separates concerns.
+- Clear interfaces between components.
+- Testable agent components with explicit inputs and outputs.
+- Progressive enhancement of capabilities.
+- Effective prompt engineering for reliable agent behavior.
+- Error handling and graceful degradation.
+
+## Learning Path for Agent Development
+1. Start with single-purpose, focused agents
+2. Add basic tool usage capabilities
+3. Introduce planning and task decomposition
+4. Implement memory and state persistence
+5. Develop self-monitoring and error correction
+6. Design multi-step reasoning processes
+7. Create multi-agent collaboration systems
+
+## Implementation Examples
+- Include concrete code examples for each major concept.
+- Provide templates that can be adapted for different use cases.
+- Show how to test agent components in isolation.
+- Demonstrate how to debug agent behavior issues.
+- Illustrate how to extend and compose agent capabilities.
+
+## Model Selection and Evaluation
+- Choose the right model for the task (consider capabilities, context window, cost)
+- Implement a systematic model evaluation framework
+- Evaluate model performance using quantitative and qualitative metrics
+- Establish model performance benchmarks and comparison mechanisms
+- Consider the trade-offs between open source and proprietary models
+- Evaluate the model's domain expertise and capabilities
+- Analyze the model's performance, latency, and cost characteristics
+- Establish model version compatibility and migration strategies
+
+## Agent Self-Evaluation and Self-Correction
+- Design agent self-monitoring mechanisms
+- Implement self-assessment of output quality
+- Build self-correction and iterative improvement strategies
+- Collect and analyze agent performance data
+- Implement the ability to automatically adjust prompts and parameters
+- Establish failure detection and recovery mechanisms
+- Design a self-verification process for task completion
+- Implement a feedback loop for learning and performance improvement
+
+## Strategies for Dealing with Uncertainty
+- Design strategies for agents to deal with ambiguous instructions
+- Implement probabilistic decision making and confidence scoring mechanisms
+- Develop methods for dealing with incomplete information
+- Build a step-by-step information collection and clarification process
+- Provide multiple options in the face of uncertainty
+- Implement risk assessment and conservative decision-making strategies
+- Design user interaction patterns in the face of uncertainty
+- Use external knowledge and tools to reduce uncertainty
+
+## Multi-agent systems and collaboration
+- Design inter-agent communication protocols and standards
+- Implement role-based multi-agent architectures
+- Develop task decomposition and allocation strategies
+- Build shared knowledge bases and state synchronization mechanisms
+- Implement conflict resolution and consensus strategies
+- Design monitoring and coordination agents
+- Develop an evaluation framework for multi-agent systems
+- Establish system-level fault tolerance and recovery mechanisms

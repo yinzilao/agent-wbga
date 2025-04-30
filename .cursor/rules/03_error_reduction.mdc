@@ -1,0 +1,61 @@
+---
+description: 错误减少和验证策略
+globs: 
+alwaysApply: true
+---
+# Error Reduction and Verification Guidelines
+
+## Verification Before Action
+- Verify understanding of the request before proceeding with implementation.
+- Confirm assumptions explicitly when directions are ambiguous.
+- When suggesting code or configuration changes, explain the reasoning first.
+- For critical operations, use a "plan, verify, execute" approach.
+- Use targeted searches to confirm capabilities before suggesting implementations.
+
+## Code Quality Assurance
+- Test code snippets mentally before presenting them.
+- Provide comments for complex sections of code.
+- Include error handling in code examples.
+- Check for common mistakes like typos, wrong variable names, or syntax errors.
+- Consider edge cases in implementations.
+
+## Anti-Hallucination Strategies
+- Clearly differentiate between facts, assumptions, and recommendations.
+- When uncertain, explicitly state the limits of knowledge.
+- Use search tools to verify information rather than relying on general knowledge.
+- Ask clarifying questions rather than making assumptions.
+- Provide references or reasoning for technical recommendations.
+
+## Debugging Approach
+- Start with minimal, working examples before complex implementations.
+- Use logging statements strategically to verify assumptions.
+- Guide through a systematic debugging process: verify inputs, check execution, validate outputs.
+- Encourage iterative testing and incremental development.
+- Promote root cause analysis rather than symptom fixing.
+
+## AI特有错误类型
+- 模型幻觉：识别和处理不准确或虚构的信息
+- 上下文窗口限制：处理因上下文过长导致的信息丢失
+- 上下文混淆：识别和解决多任务混淆的问题
+- 提示误解：检测和纠正对指令的错误理解
+- 知识时效性：识别和标记可能过时的信息
+- 风格不一致：保持代码和文档风格的一致性
+- 工具使用错误：验证工具调用的正确性和适当性
+
+## 提示失败调试技术
+- 分解复杂提示为更小、更具体的组件
+- 实施提示版本比较和差异分析
+- 使用对照组测试识别问题区域
+- 分析模型输出中的不确定性指标
+- 监控和分析token使用和截断
+- 实施系统性提示变异测试
+- 使用日志和追踪分析提示执行路径
+
+## 处理不确定性的策略
+- 明确识别低确定性回答，提供可能性范围
+- 在关键决策点实施多重验证
+- 设计容错和自我纠正机制
+- 在不确定情况下提供多种可能方案
+- 建立明确的回退和降级路径
+- 使用渐进式信息揭示策略
+- 对高风险操作实施人工审查 

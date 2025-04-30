@@ -1,0 +1,76 @@
+---
+description: 
+globs: 
+alwaysApply: true
+---
+# AI Testing Strategy
+
+## Prompt Testing
+- Develop a unit test suite for prompts
+- Test edge cases and unusual inputs
+- Verify prompt robustness against different models
+- Evaluate prompt performance using automated tests
+- Build a prompt regression test library
+- Verify prompt improvements using control group tests
+- Test prompts of varying length and complexity
+- Implement parameterized testing for prompt templates
+
+## Agent Behavior Testing
+- Define expected agent behavior and outcomes
+- Develop test scenarios that simulate different user interactions
+- Test the agent's decision-making capabilities under various conditions
+- Use continuous integration to run tests automatically
+- Build an agent behavior simulation environment
+- Test correctness and efficiency of task completion
+- Evaluate the agent's ability to handle ambiguous or incomplete instructions
+- Test agent memory and context tracking capabilities
+
+## Integration Testing
+- Test the integration of the agent with external systems and tools
+- Verify data flows and interactions
+- Test dependencies using mock services
+- Monitor performance and resource utilization
+- Test the system's behavior under different load conditions
+- Verify error handling and failure recovery mechanisms
+- Test API limits and quota management
+- Evaluate the impact of network and service outages
+
+## Security Testing
+- Develop tests for prompt injections
+- Test model jailbreak attempts
+- Test permission boundaries and data access restrictions
+- Conduct regular security audits
+- Implement vulnerability scans and penetration tests
+- Test compliance with sensitive data handling
+- Verify authentication and authorization mechanisms
+- Evaluate logging and audit trail capabilities
+
+## User Experience Testing
+- Evaluate the quality and relevance of agent responses
+- Measure response times and user waiting experience
+- Collect user feedback and satisfaction metrics
+- Conduct A/B testing to compare different agent versions
+- Evaluate the naturalness and coherence of the agent's language
+- Test adaptability to different user skill levels
+- Evaluate the reliability of the agent in critical tasks
+- Test the performance of the agent on various devices and interfaces
+
+## Performance Testing
+- Measure response times and latency
+- Evaluate concurrent request handling capabilities
+- Monitor resource usage (memory, CPU, GPU)
+- Conduct load and stress testing
+- Evaluate scalability and capacity planning
+- Test long-running stability
+- Identify performance bottlenecks and optimization opportunities
+- Evaluate the cost-benefit ratio of different configurations
+
+## Test automation and continuous testing
+- Establish an automated test pipeline
+- Implement a continuous testing process
+- Use a test-driven development (TDD) approach
+- Establish test coverage goals and monitoring
+- Implement a regression testing strategy
+- Automate test result analysis and reporting
+- Integrate testing into CI/CD workflows
+- Use chaos engineering to test system resilience

@@ -1,0 +1,42 @@
+---
+description: 
+globs: 
+alwaysApply: true
+---
+# Task Management Guidelines
+
+## Task Breakdown Process
+- Analyze complex requests and break them down into discrete, manageable tasks.
+- Organize tasks hierarchically with main tasks and subtasks.
+- Prioritize tasks based on dependencies and learning progression.
+- Use a consistent format for task definitions that includes:
+  - Task ID
+  - Task description
+  - Expected outcome
+  - Estimated complexity (Low/Medium/High)
+  - Dependencies (if any)
+
+## Task Tracking
+- Maintain an updated task list across conversation sessions.
+- Reference the current task being addressed at the beginning of each response.
+- Mark tasks as completed once finished and summarize outcomes.
+- Revisit incomplete tasks and explain how they connect to the current work.
+- Periodically provide a task status overview to maintain learning momentum.
+
+## Task Template
+
+```
+TASK [ID]: [Brief title]
+Description: [Detailed description of what needs to be done]
+Expected outcome: [What success looks like for this task]
+Complexity: [Low/Medium/High]
+Dependencies: [List of task IDs this task depends on, if any]
+Status: [Not Started/In Progress/Completed]
+```
+
+## Progressive Learning Path
+- Start with foundational tasks before moving to advanced concepts.
+- Include small wins early to build confidence.
+- Create learning checkpoints at the end of significant tasks to verify understanding.
+- Provide reflection questions after completing major tasks to reinforce learning.
+- Use a spiral approach to revisit key concepts with increasing depth.

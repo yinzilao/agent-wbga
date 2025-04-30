@@ -1,0 +1,57 @@
+---
+description: 
+globs: 
+alwaysApply: true
+---
+# AI Agent Coding Standards
+
+## Coding Style and Format
+- Use consistent naming conventions (e.g., utility functions start with verbs, e.g., `fetchData`, `processInput`)
+- Use descriptive names for agent components that reflect their functionality and responsibilities (e.g., `InputProcessor`, `DecisionEngine`)
+- Keep functions and methods concise (no more than 50 lines)
+- Use meaningful variable names (avoid names like agent1, agent2)
+- Use consistent indentation and formatting (4-space indentation is recommended)
+- Split complex logic into smaller functions
+- Limit the number of function parameters (ideally no more than 3)
+
+## Code Comments and Documentation
+- Provide clear comments for complex agent behaviors
+- Document the design intent and parameters of prompt templates
+- Add clear docstrings to utility functions that explain inputs, outputs, and usage
+- Add explanatory comments at key decision points
+- Use consistent comment style and formatting
+- Code should be self-explanatory, and comments should explain "why" rather than just "what"
+- Provide high-level documentation for each major component of the proxy system
+
+## Modularity and component design
+- Decompose proxy functionality into independent reusable components
+- Clearly define interfaces between components
+- Separate prompt templates from business logic
+- Avoid tightly coupled proxy design
+- Implement separation of concerns (SoC) principle
+- Components should have a single responsibility
+- Define clear dependencies and data flows
+
+## Error handling
+- Implement robust error handling mechanisms
+- Use appropriate error handling for API calls and external tools
+- Provide graceful degradation strategies for proxy failures
+- Log errors and exceptions for debugging
+- Distinguish between different types of errors (user errors, system errors, third-party service errors)
+- Provide meaningful error messages and recovery suggestions
+
+## Code quality tools
+- Use static code analysis tools (ESLint, Pylint, etc.)
+- Implement code style checkers (such as Black, Prettier)
+- Use type checking (TypeScript, mypy, etc.)
+- Integrate code quality checks into CI/CD processes
+- Perform regular code reviews
+- Establish quantitative metrics and goals for code quality
+
+## AI-specific code considerations
+- Strategies for managing context window size limits
+- Coding practices to optimize token usage
+- Safeguards against model hallucinations
+- Implement request retry and fallback strategies
+- Caching mechanisms to reduce unnecessary model calls
+- Implement post-processing logic for model outputs

@@ -1,0 +1,76 @@
+---
+description: 
+globs: 
+alwaysApply: true
+---
+# Prompt Engineering Best Practices
+
+## Prompt Design
+- Keep prompts clear, specific, and concise
+- Use structured input formats
+- Include clear instructions and constraints
+- Avoid ambiguous language and excessive context
+- Define output formats and expected results
+- Organize prompt parts in a logical order
+- Use examples to illustrate expected behavior (learning with a small number of examples)
+- Guide complex reasoning with step-by-step instructions
+
+## Prompt Optimization
+- Iteratively test and improve prompts
+- Analyze prompt performance and success rate
+- Record prompt iteration history
+- Build a prompt template library
+- Identify and eliminate ambiguities
+- Use prompt links to decompose complex tasks
+- Optimize token usage efficiency
+- Verify compatibility of different model versions
+
+## Prompt Security
+- Avoid including sensitive information in prompts
+- Use abstract instructions to avoid information leakage
+- Prevent prompt injection attacks
+- Implement prompt verification mechanisms
+- Identify and exclude potentially harmful outputs
+- Implement content filtering and auditing
+- Follow safe prompt design principles
+- Limit prompt permissions and access scope
+
+## Prompt Version Control
+- Maintain prompt version history
+- Document the purpose and effect of each change
+- Establish benchmark performance tests for each version
+- Support rollback to previous prompt versions
+- Use naming conventions and version numbers
+- Document compatibility of models and prompts
+- Implement prompt review process
+- Save mapping of prompts to corresponding model versions
+
+## Context Window Management
+- Optimize prompts to fit context window limitations
+- Implement context compression and summarization techniques
+- Design dynamic context management strategies
+- Use external knowledge bases to extend context
+- Identify and prioritize key information
+- Implement context window segmentation strategies
+- Use efficient encoding and structure
+- Monitor and optimize context window usage
+
+## Prompt Composition and Modularity
+- Build a library of reusable prompt components
+- Define standard prompt templates
+- Implement prompt parameterization and dynamic generation
+- Decompose complex prompts into manageable modules
+- Use prompt composition to solve multi-step problems
+- Define cross-prompt standards and conventions
+- Design domain-specific prompt modules
+- Implement prompt inheritance and extension mechanisms
+
+## Prompt Evaluation and Analysis
+- Establish evaluation criteria for prompt quality
+- Conduct systematic prompt comparison and benchmarking
+- Analyze prompt performance bottlenecks
+- Collect and integrate user feedback
+- Identify interaction patterns between models and prompts
+- Implement an automated prompt evaluation pipeline
+- Track prompt evolution and performance trends
+- Use prompt analysis to improve designs

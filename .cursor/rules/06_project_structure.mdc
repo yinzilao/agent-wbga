@@ -1,0 +1,88 @@
+---
+description: 项目结构指导
+globs: 
+alwaysApply: true
+---
+# Project Structure Guidelines
+
+## Core Project Components
+- Define a clear folder structure for agent projects:
+  - `src/`: Source code
+  - `examples/`: Example usage
+  - `tests/`: Test cases
+  - `docs/`: Documentation
+  - `tools/`: Utility scripts and tools
+- Provide boilerplate templates for common agent patterns.
+- Include configuration templates for different deployment scenarios.
+
+## Component Organization
+- Organize agent code into logical modules:
+  - Input processors
+  - Planning and reasoning components
+  - Tool connectors
+  - Memory systems
+  - Output formatters
+- Maintain clear separation between core agent logic and application-specific code.
+- Define clear interfaces between components.
+
+## Documentation Standards
+- Each module should include:
+  - Purpose and core functionality
+  - Input/output contracts
+  - Dependencies
+  - Usage examples
+- Maintain up-to-date architecture diagrams.
+- Document design decisions and rationales.
+- Include troubleshooting guides for common issues.
+
+## Testing Approach
+- Unit tests for individual components.
+- Integration tests for component interactions.
+- End-to-end tests for complete agent workflows.
+- Test fixtures for simulating different scenarios.
+- Performance benchmarks for critical operations.
+
+## Recommended Project Setup
+- Dependency management best practices.
+- Development environment configuration.
+- Linting and code formatting standards.
+- Continuous integration workflow recommendations.
+- Versioning and release management approach.
+
+## AI代理特有的目录结构
+- `prompts/`: 提示模板和提示工程资源
+  - `templates/`: 可重用提示模板
+  - `chains/`: 提示链模式和组合
+  - `examples/`: 少样本学习示例
+- `models/`: 模型管理和配置
+  - `configs/`: 模型配置文件
+  - `adapters/`: 模型适配器和接口
+  - `evaluations/`: 模型评估结果
+- `agents/`: 代理定义和实现
+  - `roles/`: 不同角色的代理实现
+  - `behaviors/`: 代理行为定义
+  - `workflows/`: 多代理工作流
+- `tools/`: 代理可以使用的工具
+  - `connectors/`: 外部系统连接器
+  - `actions/`: 代理可执行操作
+  - `skills/`: 代理技能库
+
+## 提示模板和配置组织
+- 使用模块化提示结构，支持模板继承和组合
+- 将提示模板与代码分离，便于非开发人员编辑
+- 实施提示版本控制和变更历史
+- 设计基于角色的提示库，适应不同场景
+- 维护提示变体，用于A/B测试和性能比较
+- 建立提示模板文档和使用指南
+- 实现提示参数化和配置驱动的生成
+- 分类管理特定领域的提示集合
+
+## 模型权重和工件管理
+- 定义模型版本命名和存储约定
+- 实现模型权重的版本控制和变更追踪
+- 设计模型缓存和优化策略
+- 建立模型评估基准和比较机制
+- 维护模型兼容性矩阵和依赖关系
+- 实施模型回滚和版本切换机制
+- 建立模型使用审计和监控系统
+- 管理微调和适配器作为单独的工件 
